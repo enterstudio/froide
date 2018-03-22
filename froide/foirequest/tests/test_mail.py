@@ -63,9 +63,9 @@ class MailTest(TestCase):
         self.assertEqual(len(messages), 2)
         self.assertEqual(messages[1].subject, "Fwd: Informationsfreiheitsgesetz des Bundes, Antragsvordruck für Open Data")
         self.assertEqual(len(messages[1].attachments), 2)
-        self.assertEqual(messages[1].attachments[0].name,
-                         "TI-IFG-AntragVordruck.docx")
-        self.assertTrue(messages[1].attachments[1].name.endswith(".pdf"))
+        attachment_names = set([a.name for a in messages[1].attachments])
+        self.assertIn("TI-IFG-AntragVordruck.docx", attachment_names)
+        self.assertIn("TI-IFG-AntragVordruck_converted.pdf", attachment_names)
         self.assertFalse(messages[1].attachments[0].is_converted)
         self.assertTrue(messages[1].attachments[1].is_converted)
         self.assertTrue(messages[1].attachments[1].converted is None)
