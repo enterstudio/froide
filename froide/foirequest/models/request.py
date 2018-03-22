@@ -684,6 +684,10 @@ class FoiRequest(models.Model):
             attachment._committed = False
             att.file = File(attachment)
             att.save()
+            print('add-attachment.name', attachment.name)
+            print('add-att.pk', att.pk)
+            print('add-att.file.name', att.file.name)
+            print('add-att.name', att.name)
 
         self.message_received.send(sender=self, message=message)
 

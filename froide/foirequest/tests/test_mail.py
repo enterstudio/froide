@@ -60,6 +60,10 @@ class MailTest(TestCase):
 
         request = FoiRequest.objects.get_by_secret_mail(self.secret_address)
         messages = request.foimessage_set.all()
+        print('att.pk', messages[1].attachments[0].pk)
+        print('file.name', messages[1].attachments[0].file.name)
+        print('file.path', messages[1].attachments[0].file.path)
+        print('name', messages[1].attachments[0].name)
         self.assertEqual(len(messages), 2)
         self.assertEqual(messages[1].subject, "Fwd: Informationsfreiheitsgesetz des Bundes, Antragsvordruck für Open Data")
         self.assertEqual(len(messages[1].attachments), 2)
